@@ -1,0 +1,176 @@
+#include <stdio.h>
+int credit=0;
+struct student {
+char n[20],g[10],bg[5];
+int age,sem,fit;
+}s[100];
+
+void bmi() {
+float w,h,b;
+printf("enter weight and height in kg and meters\n");
+scanf("%f%f",&w,&h);
+float bmi=w/(h*h);
+printf("bmi=%f\n",bmi);
+if(bmi<18.5) {
+printf("underweight\n");
+credit=2;
+}
+if(bmi>=18.5&&bmi<=24.9) {
+printf("healthy weight\n");
+credit=5;
+}
+if(bmi>=25&&bmi<=29.9) {
+printf("over weight\n");
+credit=2;
+}
+if(bmi>30){
+printf("obese\n");
+credit=1;
+}}
+
+void bp(){
+int sys,dia;
+printf("enter bp\n");
+scanf("%d%d",&sys,&dia);
+if(sys<=120&&dia<=80) {
+printf("normal\n");
+credit=credit+5;
+}
+else if(sys<=130&&dia<=85) {
+printf("pre-hypertension\n");
+credit=credit=4;
+}
+else if(sys<=139&&dia<=90) {
+printf("hypertension stage 1\n");
+credit=credit+3;
+}
+else if(sys<=180&&dia<=110) {
+printf("hypertension stage 2\n");
+credit=credit+2;
+}
+else if(sys>180&&dia>110) {
+printf("hypertension stage 3\n");
+credit=credit+1;
+}
+else 
+printf("error!!\n");
+}
+
+void Sugar() {
+int pre,post;
+printf("enter pre and post glucose levels\n");
+scanf("%d%d",&pre,&post);
+if(pre<=100&&post<=140) {
+printf("normal\n");
+credit=credit+5;
+}
+else
+if(pre<=125&&post<=199){
+printf("pre diabetes\n");
+credit=credit+3;
+}
+else
+if(pre>125&&post>199){
+printf("diabetes\n");
+credit=credit+1;
+}
+else
+printf("error!\n");
+}
+
+void bcl(){
+float bcl;
+printf("enter the blood cholestrol level\n");
+scanf("%f",&bcl);
+if(bcl<200) {
+printf("normal\n");
+credit=credit+5;
+}
+if(bcl>=200&&bcl<=239){
+printf("borderline\n");
+credit=credit+4;
+}
+if(bcl>=240) {
+printf("high\n");
+credit=credit+2;
+}
+}
+
+void Others(){
+int sports,excer,smoke,drink,chew,walk,jog;
+
+printf("answer the following questions\n 1 for yes\n 0 for no\n");
+printf("are you into sports?\n");
+scanf("%d",&sports);
+if(sports==1)
+credit=credit+5;
+
+printf("do you excercise?\n");
+scanf("%d",&excer);
+if(excer==1)
+credit=credit+5;
+
+printf("do you smoke?\n");
+scanf("%d",&smoke);
+if(smoke==1)
+credit=credit-5;
+
+printf("do you consume alcohol?\n");
+scanf("%d",&drink);
+if(drink==1)
+credit=credit-3;
+
+printf("do you chew tobacco?\n");
+scanf("%d",&chew);
+if(chew==1)
+credit=credit-5;
+
+printf("are you walk daily?\n");
+scanf("%d",&walk);
+if(walk==1)
+credit=credit+3;
+
+printf("do you jog daily?\n");
+scanf("%d",&jog);
+if(jog==1)
+credit=credit+5;
+}
+
+void Student() {
+    int num;
+printf("enter number of students\n");
+scanf("%d",&num);
+for(int i=0;i<num;i++) {
+printf("enter student details\n\n");
+printf("enter name\n");
+scanf("%s",s[i].n);
+printf("enter age\n");
+scanf("%d",&s[i].age);
+printf("enter sem\n");
+scanf("%d",&s[i].sem);
+printf("enter your gender\n");
+scanf("%s",s[i].g);
+printf("enter your blood group\n");
+scanf("%s",s[i].bg);
+s[i].fit=credit/38*10;
+printf("%d",s[i].fit);
+
+}
+
+}
+
+int main() {
+
+
+
+
+bmi();
+bcl();
+bp();
+Sugar();
+Others();
+Student();
+
+}
+
+
