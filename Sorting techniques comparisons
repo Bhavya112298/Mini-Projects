@@ -1,0 +1,302 @@
+import java.util.*;
+import java.util.Scanner;
+
+class Candi_info {
+    String cname,pname;
+    int age, candi_num , vote=0;
+    static int count=0;
+    Candi_info() {
+        count++;
+    }
+    
+    void GetCandiInfo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter candidate number");
+        this.candi_num = sc.nextInt();
+        System.out.println("enter candidate name");
+        this.cname = sc.next();
+        System.out.println("enter candidate age");
+        this.age = sc.nextInt();
+        System.out.println("enter candidate party");
+        this.pname = sc.next();
+        
+    }
+    
+    void ShowCandiInfo(){
+      System.out.println("candidate number:"+candi_num);
+      System.out.println("candidate name:"+cname);
+      System.out.println("candidate age:"+age);
+      System.out.println("candidate party:"+pname);
+    }
+    static int partition(Candi_info ci[], int low, int high) 
+    { 
+        int pivot = ci[high].vote;  
+        int i = (low-1); // index of smaller element 
+        for (int j=low; j<high; j++) 
+        { 
+            // If current element is smaller than or 
+            // equal to pivot 
+            if (ci[j].vote <= pivot) 
+            { 
+                i++; 
+  
+                // swap arr[i] and arr[j] 
+                int temp = ci[i].vote; 
+                ci[i].vote = ci[j].vote; 
+                ci[j].vote = temp; 
+            } 
+        } 
+  
+        // swap arr[i+1] and arr[high] (or pivot) 
+        int temp = ci[i+1].vote; 
+        ci[i+1].vote = ci[high].vote; 
+        ci[high].vote = temp; 
+  
+        return i+1; 
+    } 
+    
+     static void qquickSort(Candi_info ci[], int low, int high) 
+    {   
+        if (low < high) 
+        { 
+            /* pi is partitioning index, arr[pi] is  
+              now at right place */
+            int pi = partition(ci, low, high); 
+  
+            // Recursively sort elements before 
+            // partition and after partition 
+            qquickSort(ci, low, pi-1); 
+            qquickSort(ci, pi+1, high); 
+        }
+        
+        
+    } 
+    
+    
+    static void printqquicksort(Candi_info[] ci){
+        System.out.println("winner is "+ci[count].cname);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+static void sselectionSort(Candi_info ci[]) 
+    { 
+       
+  
+        // One by one move boundary of unsorted subarray 
+        for (int i = 0; i < count-1; i++) 
+        { 
+            // Find the minimum element in unsorted array 
+            int min_idx = i; 
+            for (int j = i+1; j < count; j++) 
+                if (ci[j].vote < ci[min_idx].vote) 
+                    min_idx = j; 
+  
+            // Swap the found minimum element with the first 
+            // element 
+            int temp = ci[min_idx].vote; 
+            ci[min_idx].vote = ci[i].vote; 
+            ci[i].vote = temp; 
+           
+        }
+        
+         System.out.println("winner is "+ci[count-1].cname);
+    }
+        
+    
+ static void bbubbleSort(Candi_info[] ci) 
+    { 
+       
+        for (int i = 0; i < count-1; i++) 
+            for (int j = 0; j < count-i-1; j++) 
+                if (ci[j].vote > ci[j+1].vote) 
+                { 
+                    // swap arr[j+1] and arr[i] 
+                    Candi_info temp = ci[j]; 
+                    ci[j] = ci[j+1]; 
+                    ci[j+1] = temp; 
+                } 
+                System.out.println("2019 elections are won by"+ ci[count-1].cname);
+    } 
+  
+  
+  
+ static void mmerge(Candi_info ci[], int l, int m, int r) 
+{ 
+    int i, j, k; 
+    int n1 = m - l + 1; 
+    int n2 =  r - m; 
+  
+    /* create temp arrays */
+    int L[]=new int[n1], R[]=new int[n2]; 
+  
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++) 
+        L[i] = ci[l + i].vote; 
+    for (j = 0; j < n2; j++) 
+        R[j] = ci[m + 1+ j].vote; 
+  
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray 
+    j = 0; // Initial index of second subarray 
+    k = l; // Initial index of merged subarray 
+    while (i < n1 && j < n2) 
+    { 
+        if (L[i] <= R[j]) 
+        { 
+            ci[k].vote = L[i]; 
+            i++; 
+        } 
+        else
+        { 
+            ci[k].vote = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of L[], if there 
+       are any */
+    while (i < n1) 
+    { 
+        ci[k].vote = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of R[], if there 
+       are any */
+    while (j < n2) 
+    { 
+        ci[k].vote = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+/* l is for left index and r is right index of the 
+   sub-array of arr to be sorted */
+static void mmergeSort(Candi_info ci[], int l, int r) 
+{   int n = r;
+    if (l < r) 
+    { 
+        // Same as (l+r)/2, but avoids overflow for 
+        // large l and h 
+        int m = l+(r-l)/2; 
+  
+        // Sort first and second halves 
+        mmergeSort(ci, l, m); 
+        mmergeSort(ci, m+1, r); 
+  
+        mmerge(ci, l, m, r); 
+    } 
+    System.out.println(ci[n].cname+" is winner");
+} 
+  
+    
+}
+
+class Node{
+    
+    Candi_info ci;
+    Node next;
+    
+    public Node(Candi_info ci,Node next) {
+        this.ci=ci;
+        this.next = next;
+    }
+}
+
+
+class MyLinkedList<T>{
+    
+    Node head;
+    
+    public MyLinkedList(){
+        head = null;
+    }
+    
+    public void add(Candi_info obj) {
+        Node newNode = new Node(obj,null);
+        
+        if(head == null)
+        head = newNode;
+    
+        
+        else {
+            newNode.next = head;
+            head = newNode;
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+public class Main {
+    
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        Candi_info[] ci = new Candi_info[100];
+       
+        int n,v;
+        MyLinkedList<Candi_info> ls = new MyLinkedList<Candi_info>();
+        
+        System.out.println("enter the number of candidates");
+        n = sc.nextInt();
+        
+        System.out.println("enter the number of voters");
+        v = sc.nextInt();
+        
+        for(int i=0;i<n;i++) {
+           
+            System.out.println("enter the details of the candidate no."+i+1);
+            ci[i]=new Candi_info();
+            ci[i].GetCandiInfo();
+            ls.add(ci[i]);
+            
+            
+        }
+        System.out.println("-------------------welcome to vote------------------");
+        System.out.println("---------------------------------------------------------");
+        for(int i=0;i<n;i++)
+        ci[i].ShowCandiInfo();
+        System.out.println("----------------------------------------------------------");
+        for(int i =0;i<v;i++){
+            System.out.println("enter your vote");
+         int votep = sc.nextInt();
+         
+         for(int j=0;j<n;j++){
+             if(votep==ci[j].candi_num){
+                 ci[j].vote++;
+             }
+         }
+            
+        }
+        
+       for(int i=0;i<n;i++)
+       System.out.println(ci[i].cname + "  " + ci[i].vote);
+       
+       //Candi_info.bbubbleSort(ci);
+       //Candi_info.mmergeSort(ci,0,n-1);
+        //Candi_info.sselectionSort(ci);
+        Candi_info.qquickSort(ci,0,n-1);
+        Candi_info.printqquicksort(ci);
+        System.out.println("  ");
+    }
+}
