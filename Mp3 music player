@@ -167,13 +167,3 @@ public class MainClass {
            new MusicPlayer();
     }
 }
-1
-2
-3
-4
-5
-public class MainClass {
-    public static void main(String[] args){
-           new MusicPlayer();
-    }
-}
