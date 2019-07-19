@@ -1,12 +1,43 @@
-#include <stdio.h>
-int credit=0;
-struct student {
-char n[20],g[10],bg[5];
-int age,sem,fit;
-}s[100];
+#include<stdio.h>
+int credit = 0;
+//------------------------------------------------------------------
+struct student
+{
+    char n[20],g[10],bg[5];
+    int age,sem,fit;
+}s; 
+//------------------------------------------------------------------
+void GetStudentInfo () {
+    
+printf("enter student details\n\n");
+printf("enter name\n");
+scanf("%s",s.n);
+printf("enter age\n");
+scanf("%d",&s.age);
+printf("enter sem\n");
+scanf("%d",&s.sem);
+printf("enter your gender\n");
+scanf("%s",s.g);
+printf("enter your blood group\n");
+scanf("%s",s.bg);
 
+    
+    
+}
+//------------------------------------------------------------------------------
+void getResult() {
+printf("Name: %s\n",s.n);
+printf("Age:%d\n",s.age);
+
+s.fit=credit*10/38;
+
+printf("------------------------------\n");
+printf("|your fitness rating is:%d|\n",s.fit);
+printf("------------------------------\n");
+}
+//-----------------------------------------------------------------------------
 void bmi() {
-float w,h,b;
+float w,h;
 printf("enter weight and height in kg and meters\n");
 scanf("%f%f",&w,&h);
 float bmi=w/(h*h);
@@ -15,19 +46,21 @@ if(bmi<18.5) {
 printf("underweight\n");
 credit=2;
 }
-if(bmi>=18.5&&bmi<=24.9) {
+else if(bmi>=18.5&&bmi<=24.9) {
 printf("healthy weight\n");
 credit=5;
 }
-if(bmi>=25&&bmi<=29.9) {
+else if(bmi>=25&&bmi<=29.9) {
 printf("over weight\n");
 credit=2;
 }
-if(bmi>30){
+else if(bmi>30){
 printf("obese\n");
 credit=1;
-}}
+}
+}
 
+//-----------------------------------------------------------------------------
 void bp(){
 int sys,dia;
 printf("enter bp\n");
@@ -55,7 +88,7 @@ credit=credit+1;
 else 
 printf("error!!\n");
 }
-
+//--------------------------------------------------------------------
 void Sugar() {
 int pre,post;
 printf("enter pre and post glucose levels\n");
@@ -77,7 +110,7 @@ credit=credit+1;
 else
 printf("error!\n");
 }
-
+//-------------------------------------------------------------
 void bcl(){
 float bcl;
 printf("enter the blood cholestrol level\n");
@@ -95,7 +128,7 @@ printf("high\n");
 credit=credit+2;
 }
 }
-
+//----------------------------------------------------------------
 void Others(){
 int sports,excer,smoke,drink,chew,walk,jog;
 
@@ -136,41 +169,33 @@ if(jog==1)
 credit=credit+5;
 }
 
-void Student() {
-    int num;
-printf("enter number of students\n");
-scanf("%d",&num);
-for(int i=0;i<num;i++) {
-printf("enter student details\n\n");
-printf("enter name\n");
-scanf("%s",s[i].n);
-printf("enter age\n");
-scanf("%d",&s[i].age);
-printf("enter sem\n");
-scanf("%d",&s[i].sem);
-printf("enter your gender\n");
-scanf("%s",s[i].g);
-printf("enter your blood group\n");
-scanf("%s",s[i].bg);
-s[i].fit=credit/38*10;
-printf("%d",s[i].fit);
+//--------------------------------------------------------------------------------
 
+
+int main()
+{
+    
+printf("_____________________________________________________________________________\n") ;   
+printf("FITNESS CALCULATOR\n");
+printf("_____________________________________________________________________________\n");
+    
+    GetStudentInfo();
+ bmi();   
+ bp();
+ Sugar();
+ bcl();
+ Others();
+    getResult();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    return 0;
 }
-
-}
-
-int main() {
-
-
-
-
-bmi();
-bcl();
-bp();
-Sugar();
-Others();
-Student();
-
-}
-
+ 
 
